@@ -1,7 +1,7 @@
 import setuptools
 
-#with open("README.md", "r") as fh:
-#    long_description = fh.read()
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 with open("requirements.txt", "r") as f:
     requirements = f.read().splitlines()
@@ -13,8 +13,8 @@ setuptools.setup(
     author="Jasper Phelps",
     author_email="jasper.s.phelps@gmail.com",
     description="Utilities for the righty GridTape-TEM dataset",
-    #long_description=long_description,
-    #long_description_content_type="text/markdown",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     url="https://github.com/jasper-tms/righty",
     packages=setuptools.find_packages(),
     classifiers=[
