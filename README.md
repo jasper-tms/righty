@@ -1,10 +1,16 @@
 ### Python code for the "righty" GridTape-TEM dataset
 
+#### Installation
 Install this package into your python environment directly from GitHub using pip:
 
     pip install git+https://github.com/jasper-tms/righty
+    
+To then later pull updates from github, use:
 
-Then launch python and get started by looking at the dataset's description:
+    pip install --force-reinstall git+https://github.com/jasper-tms/righty
+
+#### Get started
+Launch python, import this package, and get started by looking at the dataset's description:
 
     import righty
     print(righty.info.dataset_description)
