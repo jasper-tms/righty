@@ -25,11 +25,10 @@ github_url = 'https://github.com/jasper-tms/righty'
 
 descriptions['dataset_description'] = 'A few sentences describing what this dataset is.'
 dataset_description = (
-'GridTape-TEM (transmission electron microscopy) dataset of the entire central'
-' nervous system of an adult female fly (Drosophila melanogaster). From this'
-" dataset, this fly's individual neurons and synapses can be reconstructed"
-' produce a connectome. This electron microscopy dataset is nicknamed'
-f' "righty". See {github_url} for more information.'
+'GridTape-TEM (transmission electron microscopy) dataset of the entire '
+'central nervous system (brain and ventral nerve cord) of an adult '
+'female fly (Drosophila melanogaster). This electron microscopy '
+f'dataset is nicknamed "righty". See {github_url} for more information.'
 )
 
 descriptions['sample_info'] = (
