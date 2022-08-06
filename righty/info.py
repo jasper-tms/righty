@@ -56,10 +56,10 @@ descriptions['voxel_size'] = 'The size (in nanometers) of each voxel in the EM d
 voxel_size = (4, 4, 45) 
 
 descriptions['shape'] = 'The size (in number of voxels) of the bounding box of the aligned EM dataset. In xyz order'
-shape = (249000, 287864, 7008) 
+shape = (249000, 287864, 7010)
 
 descriptions['size'] = 'The size (in nanometers) of the bounding box of the aligned EM dataset. In xyx order'
-size = (996000, 1151456, 315360)
+size = (996000, 1151456, 315450)
 
 
 descriptions['hms_o2_path'] = "Path to data on Harvard Medical School's O2 cluster filesystem"
@@ -84,12 +84,12 @@ descriptions['skipped_slots'] = (
     ' data was lost. These slots were just skipped over.'
 )
 skipped_slots = np.array([
-    3365, 3508, 3509, 3510, 3513, 3519, 3523, 3763, 3764, 3765, 3766, 3767,
-    3768, 3769, 3770, 3771, 3772, 3773, 3774, 3775, 3776, 3777, 3778, 3779,
-    3780, 3781, 3782, 3783, 3784, 3785, 3786, 3787, 3788, 3789, 3790, 3791,
-    3792, 3793, 3794, 3795, 3796, 3797, 3798, 3799, 3800, 3801, 3802, 3803,
-    3804, 3805, 3806, 3807, 3808, 3809, 3810, 4926, 5040, 5042, 5805, 5837,
-    5852, 5881, 5928
+    3365, 3501, 3508, 3509, 3510, 3513, 3519, 3523, 3763, 3764, 3765, 3766,
+    3767, 3768, 3769, 3770, 3771, 3772, 3773, 3774, 3775, 3776, 3777, 3778,
+    3779, 3780, 3781, 3782, 3783, 3784, 3785, 3786, 3787, 3788, 3789, 3790,
+    3791, 3792, 3793, 3794, 3795, 3796, 3797, 3798, 3799, 3800, 3801, 3802,
+    3803, 3804, 3805, 3806, 3807, 3808, 3809, 3810, 4926, 5040, 5042, 6461,
+    6480
 ])
 
 
@@ -101,7 +101,7 @@ def slot_to_z(num: int) -> int:
     The difference in numbering between the GridTape slots and the aligned
     dataset's z indices accounts for slots that were skipped over during
     section collection because the microtome didn't cut any tissue. This
-    includes the 48 skipped slots during the microtome reset and 15 sections of
+    includes the 48 skipped slots during the microtome reset and 13 sections of
     spontaneous "empty swings". The renumbering makes it so that there are not
     gaps in the dataset due to the skipped slots.
     """
@@ -118,7 +118,7 @@ def z_to_slot(num: int) -> int:
     The difference in numbering between the GridTape slots and the aligned
     dataset's z indices accounts for slots that were skipped over during
     section collection because the microtome didn't cut any tissue. This
-    includes the 48 skipped slots during the microtome reset and 15 sections of
+    includes the 48 skipped slots during the microtome reset and 13 sections of
     spontaneous "empty swings". The renumbering makes it so that there are not
     gaps in the dataset due to the skipped slots.
     """
@@ -138,12 +138,16 @@ def run_tests():
     assert all([a * b == c for a, b, c in zip(voxel_size, shape, size)])
 
     # Test that slot_to_z and z_to_slot are inverses
-    for i in range(0, 7007):
+    for i in range(0, shape[2]):
         try: assert slot_to_z(z_to_slot(i)) == i, i
         except ValueError: pass
-    for i in range(0, 7070):
+    for i in range(0, max_slot_number + 1):
         try: assert z_to_slot(slot_to_z(i)) == i, i
         except ValueError: pass
+
+    # Test that shape.z is correct
+    assert shape[2] == slot_to_z(max_slot_number) + 1
+    assert z_to_slot(shape[2] - 1) == max_slot_number
 
     print('Success')
     return True
