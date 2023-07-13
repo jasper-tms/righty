@@ -12,7 +12,7 @@ setuptools.setup(
     version="0.1.0",
     author="Jasper Phelps",
     author_email="jasper.s.phelps@gmail.com",
-    description="Utilities for the righty GridTape-TEM dataset",
+    description='Code to interact with the "righty" fly CNS GridTape-TEM dataset',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/jasper-tms/righty",
